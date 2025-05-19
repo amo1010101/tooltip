@@ -1,33 +1,48 @@
-import { createMiddlewareClient } from "@supabase/auth-helpers-nextjs"
-import { NextResponse } from "next/server"
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
 
-import type { NextRequest } from "next/server"
+export async function middleware(req: NextRequest) {
+  const res = NextResponse.next()
+  
+  // Get the current path
+  const { pathname } = req.nextUrl
 
-export async function middleware(request: NextRequest) {
-  const response = NextResponse.next()
-  const supabase = createMiddlewareClient({ req: request, res: response })
-
-  // Refresh session if expired
-  await supabase.auth.getSession()
-
-  // Allow callback route to proceed without redirection
-  if (request.nextUrl.pathname.startsWith("/auth/callback")) {
-    return response
+  // Skip middleware for public routes
+  if (pathname.startsWith('/auth') || 
+      pathname.startsWith('/_next') || 
+      pathname.startsWith('/static') || 
+      pathname.startsWith('/_vercel') || 
+      pathname === '/favicon.ico' || 
+      pathname === '/robots.txt' ||
+      pathname === '/api/complete-onboarding') {
+    return res
   }
 
-  return response
+  // Get onboarding status from cookies
+  const onboardingCompleted = req.cookies.get('onboarding_completed')?.value === 'true'
+
+  // If onboarding is not completed and user is not on onboarding pages
+  if (!onboardingCompleted && !pathname.startsWith('/onboarding')) {
+    return NextResponse.redirect(new URL('/onboarding', req.url))
+  }
+
+  // If onboarding is completed and user tries to access onboarding pages
+  if (onboardingCompleted && pathname.startsWith('/onboarding')) {
+    return NextResponse.redirect(new URL('/', req.url))
+  }
+
+  return res
 }
 
 export const config = {
   matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     * - public (public files)
-     * - auth/callback (auth callback)
-     */
-    "/((?!_next/static|_next/image|favicon.ico|public).*)",
+    '/profile/:path*',
+    '/pillar/:path*',
+    '/learning/:path*',
+    '/tracking/:path*',
+    '/accountability/:path*',
+    '/summary/:path*',
+    '/diagnostic/:path*',
+    '/((?!auth|api/complete-onboarding|_next|static|_vercel|favicon.ico|robots.txt).*)',
   ],
-}
+} 

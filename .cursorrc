@@ -1,0 +1,23 @@
+{
+  "formatOnSave": true,
+  "defaultFormatter": "prettier",
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "tabWidth": 2,
+    "trailingComma": "es5",
+    "printWidth": 80,
+    "bracketSpacing": true,
+    "arrowParens": "always"
+  },
+  "typescript": {
+    "importOrder": ["^react", "^next", "^@/", "^[./]"],
+    "importOrderSeparation": true,
+    "importOrderSortSpecifiers": true
+  },
+  "tailwindcss": {
+    "classRegex": {
+      "css": "className=\"([^\"]*)\""
+    }
+  }
+} 

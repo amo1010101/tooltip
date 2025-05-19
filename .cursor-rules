@@ -1,0 +1,87 @@
+# TipTable App Development Rules
+
+## Project Overview
+TipTable is a mobile-first PWA helping users achieve a balanced life through simple interactions and gentle AI guidance. The app focuses on 5 life pillars: Health & Energy, Mental & Emotions, Relationships, Work & Finance, and Personal Growth.
+
+## Technical Requirements
+- Next.js PWA with future migration path to React Native
+- Mobile-first responsive design
+- TypeScript for type safety
+- Tailwind CSS for styling
+- shadcn/ui for UI components
+- Separation of business logic from UI components
+- Modular architecture organized by features
+
+## Technical Stack
+- Framework: Next.js with PWA configuration
+- Language: TypeScript
+- Styling: Tailwind CSS
+- UI Components: shadcn/ui
+- State Management: React Context (initial), Zustand/Jotai (future)
+- Backend: Next.js API Routes
+- Data Storage: Supabase
+- Authentication: Supabase Auth
+
+## Development Workflow
+1. Start with core UI and navigation
+2. Implement Life Compass visualization
+3. Develop assessment flow
+4. Add tracking features
+5. Create learning section
+6. Test on multiple devices
+7. Optimize performance
+8. Deploy to Vercel
+
+## Core Features
+
+### 1. Assessment & Life Compass
+- Diagnostic quiz and results visualization
+- Visual representation of life balance
+- 5 life pillars assessment
+
+### 2. Learning & Growth
+- Personalized pathways
+- Micro-courses
+- Progress tracking
+
+### 3. Consistency Score
+- Personal alignment measurement
+- Priority-based tracking
+- Weekly AI feedback
+- Visual heatmap (green/yellow/red)
+- Formula: (actual effort / declared priority)
+
+### 4. Accountability System
+- Buddy system integration
+- Weekly progress reports
+- Optional buddy boosters
+- Commitment pacts
+- Solo mode with buddy connection option
+- WhatsApp/Email integration
+
+### 5. Promise & Action Plan
+- Voice/text goal setting
+- AI-generated action plans
+- Weekly commitment tracking
+- Past promises archive
+- Voice recording playback
+- 3-5 step visualization
+- Weekly adjustment prompts
+
+## Design Principles
+- Ultra-clean interface with soft colors
+- Flat design with immediate visual feedback
+- Simple interactions (photos, voice notes, sliders)
+- No text input fields where possible
+- Smooth, zen-like transitions
+
+## Code Quality Standards
+- Follow TypeScript best practices
+- Maintain separation of concerns
+- Write reusable components
+- Document complex logic
+- Optimize for performance
+- Write unit tests for critical components
+- Ensure mobile-first responsive design
+- Implement proper error handling
+- Follow accessibility guidelines 
